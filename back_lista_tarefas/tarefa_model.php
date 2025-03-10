@@ -11,7 +11,8 @@ class Tarefa{
     }
 
     public function __set($atr, $value){
-       return $this->$atr = $value;
+       $this->$atr = $value;
+       return $this;
     }
 }
 
