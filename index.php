@@ -1,3 +1,8 @@
+<?php
+	$acao = 'recuperarPendentes';
+	require 'tarefa_controller.php';
+?>
+
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -7,6 +12,8 @@
 		<link rel="stylesheet" href="css/estilo.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+		<script src="scriptPendentes.js"></script>
 	</head>
 
 	<body>
@@ -36,23 +43,18 @@
 								<h4>Tarefas pendentes</h4>
 								<hr />
 
-								<div class="row mb-3 d-flex align-items-center tarefa">
-									<div class="col-sm-9">Lavar o carro</div>
-									<div class="col-sm-3 mt-2 d-flex justify-content-between">
-										<i class="fas fa-trash-alt fa-lg text-danger"></i>
-										<i class="fas fa-edit fa-lg text-info"></i>
-										<i class="fas fa-check-square fa-lg text-success"></i>
+								<?php foreach($tarefas as $indice => $tarefa){ ?>
+									<div class="row mb-3 d-flex align-items-center tarefa">
+										<div id="tarefa_<?= $tarefa->id ?>" class="col-sm-9">
+											<?= $tarefa->tarefa ?>
+										</div>
+										<div class="col-sm-3 mt-2 d-flex justify-content-between">
+											<i class="fas fa-trash-alt fa-lg text-danger" onclick="apagar(<?= $tarefa->id ?>)"></i>
+											<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $tarefa->id?>, '<?= $tarefa->tarefa ?>')"></i>
+											<i class="fas fa-check-square fa-lg text-success" onclick="realizado(<?= $tarefa->id?>)"></i>											
+										</div>
 									</div>
-								</div>
-
-								<div class="row mb-3 d-flex align-items-center tarefa">
-									<div class="col-sm-9">Passear com o cachorro</div>
-									<div class="col-sm-3 mt-2 d-flex justify-content-between">
-										<i class="fas fa-trash-alt fa-lg text-danger"></i>
-										<i class="fas fa-edit fa-lg text-info"></i>
-										<i class="fas fa-check-square fa-lg text-success"></i>
-									</div>
-								</div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
