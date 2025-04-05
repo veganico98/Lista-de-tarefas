@@ -1,31 +1,32 @@
 version: '3.8'
 
 services:
-  app:
+  web:
     build: .
-    container_name: tarefas_app
+    container_name: Lista_tarefas_app
     ports:
       - "8080:80"
     volumes:
-      - ./src:/var/www/html
-      - ./back_lista_tarefas:/var/www/html/back_lista_tarefas
+      - .:/var/www/html
     depends_on:
       - db
-    restart: always
+    environment:
+      DB_HOST: db
+      DB_NAME: php_com_pdo
+      DB_USER: root
+      DB_PASS: root
 
   db:
     image: mysql:5.7
-    container_name: tarefas_db
+    container_name: lista_tarefas_db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: tarefas_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: php_com_pdo
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-
+  
 volumes:
   db_data:
